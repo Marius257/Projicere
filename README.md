@@ -32,6 +32,10 @@
 
 * Publications et commentaires non lues
 
+##### Page de catégorie (B0.1)
+
+* Publications et commentaires étiquetées (#*Catégorie*)
+
 ##### Page de profil
 
 * Informations du profil
@@ -42,7 +46,7 @@
 ### Objectifs de la Béta (o1)(o2)B0.1
 
 * o1 : IdentificationBundle
-	* Interdire à toute personne non identifier l'accès au site
+	* Interdire à toute personne non identifiée l'accès au site
 	* Configurer le routeur et le pare-feux
 	* Créer les bases de données de profil
 	* Créer la base de donnée des historiques et statistiques de connexions
@@ -54,3 +58,4 @@
 	* Grérer un système d'avis positifs, neutres et négatifs sur les publications et les commentaires
 	* Afficher les publications et commentaires lu ou non lus
 	* Créer la page d'accueil
+	* Créer les pages de catégories
