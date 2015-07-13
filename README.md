@@ -1,5 +1,5 @@
 # Projicere
-## o2 : PublicationBundle YOLO
+## o2 : PublicationBundle
 ### Objectifs généraux
 
 * Créer la base de donnée des publications et commentaires
