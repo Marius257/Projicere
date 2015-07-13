@@ -1,5 +1,5 @@
 # Projicere
-## o1 : IdentificationBundle
+## o1 : IdentificationBundle + tests
 ### Objectifs généraux
 
 * Interdire à toute personne non identifiée l'accès au site
