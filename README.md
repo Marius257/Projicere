@@ -23,12 +23,12 @@
 * Mettre en route notre équipe
 
 #### Plan du site (v1.0)
-##### Page d'identification
+##### Page d'identification (B0.1)
 
 * Seule page accessible sans être connecté
 * Formulaire de connexion
 
-##### Page d'accueil
+##### Page d'accueil (B0.1)
 
 * Publications et commentaires non lues
 
