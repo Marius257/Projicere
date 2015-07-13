@@ -11,29 +11,66 @@
 
 ### Liste des tâches
 
-**Prototype**
+**Prototype 1**
 
 #### o1p1.a1
 
 * Responsable : Astrix
 * Assistant : Marius
 * Consultant : Reijo
-* _Description :_ Préparer les entités du profil
+* Description : Préparer les entités du profil et des statistiques de connexion
+* Début : 13/07/2015
+* Fin : 14/07/2015
 
 #### o1p1.b1
 
 * Responsable : Liliande
 * Assistant :
 * Consultant : Marius
-* _Description :_ Dessiner et légender la maquette de la page d'identification
+* Description : Dessiner et légender la maquette de la page d'identification
+* Début : 13/07/2015
+* Fin : 16/07/2015
 
-......
+#### o1p1.c2
+
+* Responsable : Liliande / Astrix
+* Assistant :
+* Consultant : Marius
+* Description : Dessiner et légender la maquette de la page d'erreur
+* Début : 13/07/2015
+* Fin : 16/07/2015
+
+------
 
 #### o1p1.a2
 
 * Responsable : Reijo
 * Assistant : Marius
 * Consultant :
-* _Description :_ Créer le protocole d'identification et régler les pare-feux
+* Description : Créer le protocole d'identification et régler les pare-feux
+* Début : 13/07/2015
+* Fin : 16/07/2015
 
 #### o1p1.b2
+
+* Responsable : Eaoden
+* Assistant : Marius
+* Consultant :
+* Description : Créer la page d'identification
+* Début : 13/07/2015
+* Fin : 17/07/2015
+
+#### o1p1.c2
+
+* Responsable : Astrix
+* Assistant : Marius
+* Consultant :
+* Description : Créer la page d'erreurs
+* Début : 13/07/2015
+* Fin : 17/07/2015
+
+----
+
+**Alpha 1**
+
+#### o1A1.
