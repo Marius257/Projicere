@@ -1,0 +1,36 @@
+
+body
+{
+	margin: 0px;
+}
+
+header
+{
+	border-bottom: 1px solid;
+	background: #9DD9EA;
+}
+nav
+{
+	display: inline-block;
+    width: 100%;
+}
+header ul
+{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+header li
+{
+	text-align: center;
+	width: 24%;
+	border-right: 1px solid;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	display: inline-block
+}
+#fin_li
+{
+	border: none;
+}
