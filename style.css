@@ -2,7 +2,10 @@
 body
 {
 	margin: 0px;
+	background: url('src/images/fond_jaune.png');
 }
+
+
 
 header
 {
@@ -28,9 +31,15 @@ header li
 	border-right: 1px solid;
 	padding-bottom: 10px;
 	padding-top: 10px;
-	display: inline-block
+	display: inline-block;
+	text-transform: uppercase;
 }
 #fin_li
 {
 	border: none;
+	text-transform: capitalize;
+}
+header a
+{
+	color: black;
 }
