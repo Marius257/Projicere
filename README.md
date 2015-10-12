@@ -1,88 +1,76 @@
-﻿# Projicere
-<<<<<<< HEAD
-## o2 : PublicationBundle
+# Projicere
+## o1 : IdentificationBundle + tests
 ### Objectifs généraux
 
-* Créer la base de donnée des publications et commentaires
-* Créer le protocole d'envoi des publications et commentaires
-* Créer le protocole d'affichage et de mise en forme Markdown des publications et des commentaires
-* Créer le protocole de modification des publications et des commentaires
-* Grérer un système d'avis positifs, neutres et négatifs sur les publications et les commentaires
-* Afficher les publications et commentaires lu ou non lus
-* Créer la page d'accueil
-* Créer les pages de catégories
+* Interdire à toute personne non identifiée l'accès au site
+* Configurer le routeur et les pare-feux
+* Créer les bases de données des profils
+* Créer la base de données des historiques et statistiques de connexion
+* Créer la page d'identification
+* Créer la page d'erreur
 
 ### Liste des tâches
 
 **Prototype 1**
 
-####o2p1
+#### o1p1.a1
 
-* Responsable : test
+* Responsable : Astrix
+* Assistant : Marius
+* Consultant : Reijo
+* Description : Préparer les entités du profil et des statistiques de connexion
+* Début : 13/07/2015
+* Fin : 14/07/2015
+
+#### o1p1.b1
+
+* Responsable : Liliande
 * Assistant :
+* Consultant : Marius
+* Description : Dessiner et légender la maquette de la page d'identification
+* Début : 13/07/2015
+* Fin : 16/07/2015
+
+#### o1p1.c2
+
+* Responsable : Liliande / Astrix
+* Assistant :
+* Consultant : Marius
+* Description : Dessiner et légender la maquette de la page d'erreur
+* Début : 13/07/2015
+* Fin : 16/07/2015
+
+------
+
+#### o1p1.a2
+
+* Responsable : Reijo
+* Assistant : Marius
 * Consultant :
-* Description :
-* Début :
-* Fin :
-=======
-## Cahier des charges fonctionnelles
-### Organigrame
-#### Chef de projet (Marius)
+* Description : Créer le protocole d'identification et régler les pare-feux
+* Début : 13/07/2015
+* Fin : 16/07/2015
 
-* Responsable de la coordination et de la répartition des tâches
-* Référent du cahier des charges
+#### o1p1.b2
 
-#### Directeur technique (Reijo/Rioxo)
+* Responsable : Eaoden
+* Assistant : Marius
+* Consultant :
+* Description : Créer la page d'identification
+* Début : 13/07/2015
+* Fin : 17/07/2015
 
-* Responsable de la sécurité du code
-* Référent des problèmes techniques
+#### o1p1.c2
 
-#### Directeur artistique (Liliande)
+* Responsable : Astrix
+* Assistant : Marius
+* Consultant :
+* Description : Créer la page d'erreurs
+* Début : 13/07/2015
+* Fin : 17/07/2015
 
-* Responsable de la charte graphique
-* Référent des questions d'ergonomie et de graphisme
-	
-### Objectifs généraux (v1.0)
+----
 
-* Créer un site internet privé sécurisé capable d'évoluer
-* Développer des outils personnalisés de gestion de projet
-* Mettre en route notre équipe
+**Alpha 1**
 
-#### Plan du site (v1.0)
-##### Page d'identification (B0.1)
-
-* Seule page accessible sans être connecté
-* Formulaire de connexion
-
-##### Page d'accueil (B0.1)
-
-* Publications et commentaires non lues
-
-##### Page de catégorie (B0.1)
-
-* Publications et commentaires étiquetées (#*Catégorie*)
-
-##### Page de profil
-
-* Informations du profil
-* Bouton de modification des informations du profil (pour l'utilisateur et les modérateurs)
-* Historique des activités
-* Publications spécifiques (#*Nom du profil*)
-
-### Objectifs de la Béta (o1)(o2)B0.1
-
-* o1 : IdentificationBundle
-	* Interdire à toute personne non identifiée l'accès au site
-	* Configurer le routeur et le pare-feux
-	* Créer les bases de données de profil
-	* Créer la base de donnée des historiques et statistiques de connexions
-* o2 : PublicationBundle
-	* Créer la base de donnée des publications et commentaires
-	* Créer le protocole d'envoi des publications et commentaires
-	* Créer le protocole d'affichage et de mise en forme Markdown des publications et des commentaires
-	* Créer le protocole de modification des publications et des commentaires
-	* Grérer un système d'avis positifs, neutres et négatifs sur les publications et les commentaires
-	* Afficher les publications et commentaires lu ou non lus
-	* Créer la page d'accueil
-	* Créer les pages de catégories
->>>>>>> 2661e66c445d26826724c19fe45f283621e7f1ad
+#### o1A1.
