@@ -1,3 +1,11 @@
+projicere_coeur:
+    resource: "@ProjicereCoeurBundle/Resources/config/routing.yml"
+    prefix:   /
+
+projicere_utilisateur:
+    resource: "@ProjicereUtilisateurBundle/Resources/config/routing.yml"
+    prefix:   /utilisateur
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

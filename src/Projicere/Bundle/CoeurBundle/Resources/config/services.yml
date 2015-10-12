@@ -1,0 +1,4 @@
+services:
+#    projicere_coeur.example:
+#        class: Projicere\Bundle\CoeurBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

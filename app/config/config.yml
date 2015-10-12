@@ -7,6 +7,12 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    mot_de_passe.nb_Chiffre_min: 1
+    mot_de_passe.nb_car_majuscule_min: 1
+    mot_de_passe.nb_car_minuscule_min: 1
+    mot_de_passe.nb_car_speciaux_min: 1
+    mot_de_passe.nb_car_min: 4
+    mot_de_passe.nb_car_max: -1
 
 framework:
     #esi:             ~

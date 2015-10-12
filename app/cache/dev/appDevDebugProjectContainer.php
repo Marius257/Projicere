@@ -142,6 +142,7 @@ class appDevDebugProjectContainer extends Container
             'monolog.logger.translation' => 'getMonolog_Logger_TranslationService',
             'profiler' => 'getProfilerService',
             'profiler_listener' => 'getProfilerListenerService',
+            'projicere_utilisateur.mot_de_passe' => 'getProjicereUtilisateur_MotDePasseService',
             'property_accessor' => 'getPropertyAccessorService',
             'request' => 'getRequestService',
             'request_stack' => 'getRequestStackService',
@@ -167,6 +168,7 @@ class appDevDebugProjectContainer extends Container
             'security.role_hierarchy' => 'getSecurity_RoleHierarchyService',
             'security.secure_random' => 'getSecurity_SecureRandomService',
             'security.token_storage' => 'getSecurity_TokenStorageService',
+            'security.user.provider.concrete.in_memory' => 'getSecurity_User_Provider_Concrete_InMemoryService',
             'security.validator.user_password' => 'getSecurity_Validator_UserPasswordService',
             'sensio_distribution.security_checker' => 'getSensioDistribution_SecurityCheckerService',
             'sensio_distribution.security_checker.command' => 'getSensioDistribution_SecurityChecker_CommandService',
@@ -613,7 +615,7 @@ class appDevDebugProjectContainer extends Container
         $b = new \Doctrine\DBAL\Configuration();
         $b->setSQLLogger($a);
 
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => '127.0.0.1', 'port' => NULL, 'dbname' => 'symfony', 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => '127.0.0.1', 'port' => NULL, 'dbname' => 'symfony', 'user' => 'symfony', 'password' => 'symfony', 'charset' => 'UTF8', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
     }
 
     /**
@@ -639,22 +641,25 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        $a = new \Doctrine\ORM\Configuration();
-        $a->setEntityNamespaces(array());
-        $a->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
-        $a->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
-        $a->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
-        $a->setMetadataDriverImpl(new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain());
-        $a->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
-        $a->setProxyNamespace('Proxies');
-        $a->setAutoGenerateProxyClasses(true);
-        $a->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $a->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $a->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
-        $a->setQuoteStrategy(new \Doctrine\ORM\Mapping\DefaultQuoteStrategy());
-        $a->setEntityListenerResolver($this->get('doctrine.orm.default_entity_listener_resolver'));
+        $a = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
+        $a->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => ($this->targetDirs[3].'/src/Projicere/Bundle/UtilisateurBundle/Entity'))), 'Projicere\\Bundle\\UtilisateurBundle\\Entity');
 
-        $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $a);
+        $b = new \Doctrine\ORM\Configuration();
+        $b->setEntityNamespaces(array('ProjicereUtilisateurBundle' => 'Projicere\\Bundle\\UtilisateurBundle\\Entity'));
+        $b->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
+        $b->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
+        $b->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
+        $b->setMetadataDriverImpl($a);
+        $b->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
+        $b->setProxyNamespace('Proxies');
+        $b->setAutoGenerateProxyClasses(true);
+        $b->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $b->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $b->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
+        $b->setQuoteStrategy(new \Doctrine\ORM\Mapping\DefaultQuoteStrategy());
+        $b->setEntityListenerResolver($this->get('doctrine.orm.default_entity_listener_resolver'));
+
+        $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $b);
 
         $this->get('doctrine.orm.default_manager_configurator')->configure($instance);
 
@@ -1794,6 +1799,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'projicere_utilisateur.mot_de_passe' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Projicere\Bundle\UtilisateurBundle\Services\GestionMotDePasse A Projicere\Bundle\UtilisateurBundle\Services\GestionMotDePasse instance.
+     */
+    protected function getProjicereUtilisateur_MotDePasseService()
+    {
+        return $this->services['projicere_utilisateur.mot_de_passe'] = new \Projicere\Bundle\UtilisateurBundle\Services\GestionMotDePasse(1, 1, 1, 1, 4, -1);
+    }
+
+    /**
      * Gets the 'property_accessor' service.
      *
      * This service is shared.
@@ -1993,12 +2011,31 @@ class appDevDebugProjectContainer extends Container
     {
         $a = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
         $b = $this->get('security.token_storage');
-        $c = $this->get('security.authentication.manager');
+        $c = $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE);
         $d = $this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        $e = $this->get('http_kernel');
+        $f = $this->get('security.authentication.manager');
 
-        $e = new \Symfony\Component\Security\Http\AccessMap();
+        $g = new \Symfony\Component\HttpFoundation\RequestMatcher('/utilisateur/connection');
 
-        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($e, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '55a168c639dcc', $a, $c), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $e, $c)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($d, $d), 'default', NULL, NULL, NULL, $a));
+        $h = new \Symfony\Component\HttpFoundation\RequestMatcher('/');
+
+        $i = new \Symfony\Component\Security\Http\AccessMap();
+        $i->add($g, array(0 => 'IS_AUTHENTICATED_ANONYMOUSLY'), NULL);
+        $i->add($h, array(0 => 'ROLE_UTILISATEUR'), NULL);
+
+        $j = new \Symfony\Component\Security\Http\HttpUtils($d, $d);
+
+        $k = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler($j, array());
+        $k->setOptions(array('login_path' => '/utilisateur/connection', 'always_use_default_target_path' => false, 'default_target_path' => '/', 'target_path_parameter' => '_target_path', 'use_referer' => false));
+        $k->setProviderKey('default');
+
+        $l = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $j, array(), $a);
+        $l->setOptions(array('login_path' => '/utilisateur/connection', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'));
+
+        $m = new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $j, '/utilisateur/connection', false);
+
+        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($i, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'default', $a, $c), 2 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $j, 'default', $k, $l, array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, NULL), 3 => new \Symfony\Component\Security\Http\Firewall\BasicAuthenticationListener($b, $f, 'default', $m, $a), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '561ac6b18c378', $a, $f), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $i, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $j, 'default', $m, NULL, NULL, $a));
     }
 
     /**
@@ -3057,6 +3094,8 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views'), 'Twig');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/swiftmailer-bundle/Resources/views'), 'Swiftmailer');
         $instance->addPath(($this->targetDirs[3].'/vendor/doctrine/doctrine-bundle/Resources/views'), 'Doctrine');
+        $instance->addPath(($this->targetDirs[3].'/src/Projicere/Bundle/UtilisateurBundle/Resources/views'), 'ProjicereUtilisateur');
+        $instance->addPath(($this->targetDirs[3].'/src/Projicere/Bundle/CoeurBundle/Resources/views'), 'ProjicereCoeur');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), 'Debug');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), 'WebProfiler');
         $instance->addPath(($this->targetDirs[3].'/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views'), 'SensioDistribution');
@@ -3373,7 +3412,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('55a168c639dcc')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.in_memory'), new \Symfony\Component\Security\Core\User\UserChecker(), 'default', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('561ac6b18c378')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -3429,6 +3468,23 @@ class appDevDebugProjectContainer extends Container
     protected function getSecurity_RoleHierarchyService()
     {
         return $this->services['security.role_hierarchy'] = new \Symfony\Component\Security\Core\Role\RoleHierarchy(array());
+    }
+
+    /**
+     * Gets the 'security.user.provider.concrete.in_memory' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return \Symfony\Component\Security\Core\User\InMemoryUserProvider A Symfony\Component\Security\Core\User\InMemoryUserProvider instance.
+     */
+    protected function getSecurity_User_Provider_Concrete_InMemoryService()
+    {
+        return $this->services['security.user.provider.concrete.in_memory'] = new \Symfony\Component\Security\Core\User\InMemoryUserProvider();
     }
 
     /**
@@ -3567,24 +3623,33 @@ class appDevDebugProjectContainer extends Container
                 'DoctrineBundle' => 'Doctrine\\Bundle\\DoctrineBundle\\DoctrineBundle',
                 'SensioFrameworkExtraBundle' => 'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle',
                 'AppBundle' => 'AppBundle\\AppBundle',
+                'ProjicereUtilisateurBundle' => 'Projicere\\Bundle\\UtilisateurBundle\\ProjicereUtilisateurBundle',
+                'ProjicereCoeurBundle' => 'Projicere\\Bundle\\CoeurBundle\\ProjicereCoeurBundle',
                 'DebugBundle' => 'Symfony\\Bundle\\DebugBundle\\DebugBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
                 'SensioGeneratorBundle' => 'Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle',
+                'DoctrineFixturesBundle' => 'Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle',
             ),
             'kernel.charset' => 'UTF-8',
             'kernel.container_class' => 'appDevDebugProjectContainer',
             'database_host' => '127.0.0.1',
             'database_port' => NULL,
             'database_name' => 'symfony',
-            'database_user' => 'root',
-            'database_password' => NULL,
+            'database_user' => 'symfony',
+            'database_password' => 'symfony',
             'mailer_transport' => 'smtp',
             'mailer_host' => '127.0.0.1',
             'mailer_user' => NULL,
             'mailer_password' => NULL,
             'secret' => 'ThisTokenIsNotSoSecretChangeIt',
             'locale' => 'en',
+            'mot_de_passe.nb_chiffre_min' => 1,
+            'mot_de_passe.nb_car_majuscule_min' => 1,
+            'mot_de_passe.nb_car_minuscule_min' => 1,
+            'mot_de_passe.nb_car_speciaux_min' => 1,
+            'mot_de_passe.nb_car_min' => 4,
+            'mot_de_passe.nb_car_max' => -1,
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',

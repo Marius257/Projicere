@@ -1,0 +1,4 @@
+services:
+    projicere_utilisateur.mot_de_passe:
+        class: Projicere\Bundle\UtilisateurBundle\Services\GestionMotDePasse
+        arguments: [%mot_de_passe.nb_Chiffre_min%, %mot_de_passe.nb_car_majuscule_min%, %mot_de_passe.nb_car_minuscule_min%, %mot_de_passe.nb_car_speciaux_min%, %mot_de_passe.nb_car_min%, %mot_de_passe.nb_car_max%]

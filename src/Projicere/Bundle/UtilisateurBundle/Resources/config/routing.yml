@@ -1,0 +1,19 @@
+connection:
+    path:     /connection
+    defaults: { _controller: ProjicereUtilisateurBundle:Utilisateur:connection }
+
+deconnection:
+    path:     /deconnection
+    defaults: { _controller: ProjicereUtilisateurBundle:Utilisateur:deconnection }
+
+fiche_utilisateur:
+    path:     /ficheUtilisateur
+    defaults: { _controller: ProjicereUtilisateurBundle:Utilisateur:ficheUtilisateur }
+
+creer:
+    path:     /creer
+    defaults: { _controller: ProjicereUtilisateurBundle:Utilisateur:creer }
+
+supprimer:
+    path:     /supprimer
+    defaults: { _controller: ProjicereUtilisateurBundle:Utilisateur:supprimer }

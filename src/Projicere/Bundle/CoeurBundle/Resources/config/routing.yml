@@ -1,0 +1,3 @@
+page_principal:
+    path:     /
+    defaults: { _controller: ProjicereCoeurBundle:Principal:pagePrincipal }

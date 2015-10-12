@@ -10,3 +10,11 @@ security:
 
         default:
             anonymous: ~
+            http_basic: ~
+            form_login:
+                login_path: /utilisateur/connection
+
+
+    access_control:
+        - { path: /utilisateur/connection, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /, roles: ROLE_UTILISATEUR }
